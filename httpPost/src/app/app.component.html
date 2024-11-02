@@ -1,0 +1,57 @@
+<div class="container mt-5">
+  <h2 class="text-center">Lista de Usuarios</h2>
+  <ul class="list-group">
+      <li *ngFor="let usuario of usuarios" class="list-group-item">
+          <strong>{{ usuario.nombre }}</strong> - {{ usuario.email }} - Empresa: {{ usuario.empresa }}
+          <button (click)="cargarUsuario(usuario.id)" class="btn btn-warning btn-sm float-end">Modificar</button>
+      </li>
+  </ul>
+
+  <h2 class="mt-4">Agregar Usuario</h2>
+  <form (ngSubmit)="agregarUsuario()">
+      <div class="mb-3">
+          <label for="id" class="form-label">ID (Automático)</label>
+          <input type="number" [(ngModel)]="nextId" name="id" class="form-control" id="id" disabled>
+      </div>
+      <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre</label>
+          <input type="text" [(ngModel)]="nuevoUsuario.nombre" name="nombre" class="form-control" id="nombre" required>
+      </div>
+      <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" [(ngModel)]="nuevoUsuario.email" name="email" class="form-control" id="email" required>
+      </div>
+      <div class="mb-3">
+          <label for="empresa" class="form-label">Empresa</label>
+          <input type="text" [(ngModel)]="nuevoUsuario.empresa" name="empresa" class="form-control" id="empresa" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Agregar Usuario</button>
+  </form>
+  
+
+  <h2 class="mt-4">Modificar Usuario</h2>
+  <form (ngSubmit)="modificarUsuario()" *ngIf="usuarioSeleccionado">
+      <div class="mb-3">
+          <label for="modNombre" class="form-label">Nombre</label>
+          <input type="text" [(ngModel)]="usuarioSeleccionado.nombre" name="modNombre" class="form-control" id="modNombre" required>
+      </div>
+      <div class="mb-3">
+          <label for="modEmail" class="form-label">Email</label>
+          <input type="email" [(ngModel)]="usuarioSeleccionado.email" name="modEmail" class="form-control" id="modEmail" required>
+      </div>
+      <div class="mb-3">
+          <label for="modEmpresa" class="form-label">Empresa</label>
+          <input type="text" [(ngModel)]="usuarioSeleccionado.empresa" name="modEmpresa" class="form-control" id="modEmpresa" required>
+      </div>
+      <button type="submit" class="btn btn-success">Modificar Usuario</button>
+  </form>
+
+  <h2 class="mt-4">Eliminar Usuario</h2>
+  <form (ngSubmit)="eliminarUsuario()">
+      <div class="mb-3">
+          <label for="idEliminar" class="form-label">ID del Usuario a Eliminar</label>
+          <input type="number" [(ngModel)]="idEliminar" name="idEliminar" class="form-control" id="idEliminar" required>
+      </div>
+      <button type="submit" class="btn btn-danger">Eliminar Usuario</button>
+  </form>
+</div>
